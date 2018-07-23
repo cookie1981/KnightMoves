@@ -21,7 +21,5 @@ namespace KnightMovesTests
             Assert.That(relativeCoordinates.X, Is.EqualTo(expectedNewX));
             Assert.That(relativeCoordinates.Y, Is.EqualTo(expectedNewY));
         }
-
-
     }
 }

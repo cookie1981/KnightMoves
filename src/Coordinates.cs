@@ -9,6 +9,7 @@ namespace KnightMoves
         }
 
         public int X { get; }
+
         public int Y { get; }
 
         public Coordinates RelativeCoordinates(int distanceFromCurrentCoordinatesOnXAxis, int distanceFromCurrentCoordinatesOnYAxis)

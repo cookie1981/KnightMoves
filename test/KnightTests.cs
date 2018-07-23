@@ -1,5 +1,4 @@
 using KnightMoves;
-using Moq;
 using NUnit.Framework;
 
 namespace KnightMovesTests

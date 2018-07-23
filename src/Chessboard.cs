@@ -19,21 +19,7 @@ namespace KnightMoves
 
         public List<Coordinates> EvaluatePossibleMoves(Coordinates currentLocation, IEnumerable<(int X, int Y)> possibleMoves)
         {
-            var possibleCoordinates = possibleMoves.Select(theoreticalMove =>
-                    currentLocation.RelativeCoordinates(theoreticalMove.X, theoreticalMove.Y))
-                .ToList();
-
-            var validMoves = new List<Coordinates>();
-
-            foreach (var availableMove in possibleCoordinates)
-            {
-                if (LocationExists(availableMove))
-                {
-                    validMoves.Add(availableMove);
-                }
-            }
-
-            return validMoves;
+            return possibleMoves.Select(move => currentLocation.RelativeCoordinates(move.X, move.Y)).Where(LocationExists).ToList();
         }
     }
 }
