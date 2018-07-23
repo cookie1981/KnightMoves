@@ -35,25 +35,25 @@ namespace KnightMovesTests
             Assert.That(knight.Location, Is.EqualTo(_topLeftCorner));
         }
 
-        [Test]
-        public void ShouldOnlyEvaluateAvailableMovesOnFirstRequest()
-        {
-            const int numberOfPossibleMoves = 8;
-            const int callsFromTheConstructor = 1;
-            const int callsFromTheMoveMethod = 1;
-            const int expectedCallCount = numberOfPossibleMoves + callsFromTheConstructor + callsFromTheMoveMethod;
-            var chessboard = new Mock<IChessBoard>();
-
-            chessboard.Setup(x => x.LocationExists(It.IsAny<Coordinates>())).Returns(true);
-
-            var knight = new Knight(_topLeftCorner, chessboard.Object);
-
-            var availableMoves = knight.AvailableMoves;
-            availableMoves = knight.AvailableMoves;
-            knight.Move(new Coordinates(2, 3));
-           
-            chessboard.Verify(x => x.LocationExists(It.IsAny<Coordinates>()), Times.Exactly(expectedCallCount));
-        }
+//        [Test]
+//        public void ShouldOnlyEvaluateAvailableMovesOnFirstRequest()
+//        {
+//            const int numberOfPossibleMoves = 8;
+//            const int callsFromTheConstructor = 1;
+//            const int callsFromTheMoveMethod = 1;
+//            const int expectedCallCount = numberOfPossibleMoves + callsFromTheConstructor + callsFromTheMoveMethod;
+//            var chessboard = new Mock<IChessBoard>();
+//
+//            chessboard.Setup(x => x.LocationExists(It.IsAny<Coordinates>())).Returns(true);
+//
+//            var knight = new Knight(_topLeftCorner, chessboard.Object);
+//
+//            var availableMoves = knight.AvailableMoves;
+//            availableMoves = knight.AvailableMoves;
+//            knight.Move(new Coordinates(2, 3));
+//           
+//            chessboard.Verify(x => x.LocationExists(It.IsAny<Coordinates>()), Times.Exactly(expectedCallCount));
+//        }
 
         [Test]
         public void ShouldListAllAvailableMovesOnAnEmptyBoard()
