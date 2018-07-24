@@ -24,8 +24,6 @@ namespace KnightMoves
         {
             if (!AvailableMoves.Contains(newCoordinates)) throw new InvalidMoveException();
 
-            _movementTracker.LogLocation(newCoordinates);
-
             return new Knight(newCoordinates, _chessboard, _movementTracker);
         }
 
