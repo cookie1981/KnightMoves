@@ -5,31 +5,37 @@ namespace KnightMovesTests
 {
     public class KnightTests
     {
-        private Chessboard _emptyChessboard;
+        private CheesBoardWithTracking _emptyStandardChessboard;
         private readonly Coordinates _topLeftCorner = new Coordinates(1, 1);
 
         [SetUp]
         public void Setup()
         {
-            _emptyChessboard = new Chessboard();
+            _emptyStandardChessboard = new CheesBoardWithTracking();
         }
 
         [Test]
         public void ShouldThrowWhenStartCoordinatesAreOutOfBoundsForTheChessboard()
         {
-            Assert.Throws<InvalidStartLocationException>(() => new Knight(new Coordinates(0, 0), _emptyChessboard));
+            Assert.Throws<InvalidStartLocationException>(() => new Knight(new Coordinates(0, 0), _emptyStandardChessboard, _emptyStandardChessboard));
         }
 
         [Test]
         public void ShouldThrowWhenBoardIsNull()
         {
-            Assert.That(() => new Knight(_topLeftCorner, null), Throws.ArgumentNullException);
+            Assert.That(() => new Knight(_topLeftCorner, null, _emptyStandardChessboard), Throws.ArgumentNullException);
+        }
+
+        [Test]
+        public void ShouldThrowWhenMovementTrackerIsNull()
+        {
+            Assert.That(() => new Knight(_topLeftCorner, _emptyStandardChessboard, null), Throws.ArgumentNullException);
         }
 
         [Test]
         public void ShouldInitiailiseCoordinates()
         {
-            var knight = new Knight(_topLeftCorner, _emptyChessboard);
+            var knight = new Knight(_topLeftCorner, _emptyStandardChessboard, _emptyStandardChessboard);
 
             Assert.That(knight.Location, Is.EqualTo(_topLeftCorner));
         }
@@ -57,7 +63,7 @@ namespace KnightMovesTests
         [Test]
         public void ShouldListAllAvailableMovesOnAnEmptyBoard()
         {
-            var knight = new Knight(new Coordinates(4, 4), _emptyChessboard);
+            var knight = new Knight(new Coordinates(4, 4), _emptyStandardChessboard, _emptyStandardChessboard);
 
             Assert.That(knight.AvailableMoves.Count, Is.EqualTo(8));
             //should i test that the coords are as expected? is this duplication?
@@ -66,7 +72,7 @@ namespace KnightMovesTests
         [Test]
         public void ShouldNotListPossibleMoveWhenNewLocationIsOffTheBoard()
         {
-            var knight = new Knight(_topLeftCorner, _emptyChessboard);
+            var knight = new Knight(_topLeftCorner, _emptyStandardChessboard, _emptyStandardChessboard);
 
             Assert.That(knight.AvailableMoves.Count, Is.EqualTo(2));
             Assert.That(knight.AvailableMoves[0].X, Is.EqualTo(2));
@@ -78,7 +84,7 @@ namespace KnightMovesTests
         [Test]
         public void ShouldMoveKnight()
         {
-            var knight = new Knight(_topLeftCorner, _emptyChessboard);
+            var knight = new Knight(_topLeftCorner, _emptyStandardChessboard, _emptyStandardChessboard);
 
             var newCoordinates = new Coordinates(2,3);
 
@@ -90,9 +96,20 @@ namespace KnightMovesTests
         [Test]
         public void ShouldThrowIfAttemptedMoveIsInvalid()
         {
-            var knight = new Knight(_topLeftCorner, _emptyChessboard);
+            var knight = new Knight(_topLeftCorner, _emptyStandardChessboard, _emptyStandardChessboard);
 
             Assert.Throws<InvalidMoveException>(() => knight.Move(new Coordinates(9,9)));
+        }
+
+        [Test]
+        public void ShouldNotListPreviouslyVisitedLocationsInAvailableMoves()
+        {
+            var knight = new Knight(_topLeftCorner, _emptyStandardChessboard, _emptyStandardChessboard);
+
+            knight = knight.Move(new Coordinates(3, 2));
+
+            Assert.False(knight.AvailableMoves.Contains(_topLeftCorner));
+            Assert.That(knight.AvailableMoves.Count, Is.EqualTo(5));
         }
     }
 }
