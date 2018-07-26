@@ -6,14 +6,14 @@ namespace KnightMovesTests
     public class KnightTests
     {
         private StandardChessboard  _emptyStandardChessboard;
-        private TrackingCheesBoard _trackingChessboard;
+        private TrackingChessBoardV1 _trackingChessboard;
         private readonly Coordinates _topLeftCorner = new Coordinates(1, 1);
 
         [SetUp]
         public void Setup()
         {
             _emptyStandardChessboard = new StandardChessboard();
-            _trackingChessboard = new TrackingCheesBoard(_emptyStandardChessboard);
+            _trackingChessboard = new TrackingChessBoardV1(_emptyStandardChessboard);
         }
 
         [Test]

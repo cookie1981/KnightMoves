@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace KnightMoves
 {
-    public class TrackingCheesBoard : IChessBoard, IMovementTracker
+    public class TrackingChessBoardV1 : IChessBoard, IMovementTracker
     {
         private readonly IChessBoard _decoratedChessBoard;
 
-        public TrackingCheesBoard(IChessBoard chessBoard)
+        public TrackingChessBoardV1(IChessBoard chessBoard)
         {
             _decoratedChessBoard = chessBoard ?? throw new ArgumentNullException(nameof(chessBoard));
             UsedLocations = new List<Coordinates>();

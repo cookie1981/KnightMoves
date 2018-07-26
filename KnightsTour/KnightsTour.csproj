@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Reactive.Core" Version="4.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\KnightMoves.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Reactive">
+      <HintPath>..\..\..\Users\David Cook\.nuget\packages\system.reactive\4.0.0\lib\netstandard2.0\System.Reactive.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

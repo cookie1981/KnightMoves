@@ -11,13 +11,13 @@ namespace KnightMovesTests
         [Test]
         public void ShouldThrowWhenChessBoardIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => new TrackingCheesBoard(null));
+            Assert.Throws<ArgumentNullException>(() => new TrackingChessBoardV1(null));
         }
 
         [Test]
         public void ShouldRecordWhichGridPositionsHaveBeenUsed()
         {
-            var chessboard = new TrackingCheesBoard(_chessBoard);
+            var chessboard = new TrackingChessBoardV1(_chessBoard);
             var location = new Coordinates(1, 2);
 
             chessboard.LogLocation(location);
