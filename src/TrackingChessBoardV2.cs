@@ -55,7 +55,8 @@ namespace KnightMoves
 
         public void OnNext(Coordinates value)
         {
-            UsedLocations.Add(value);
+            if (!UsedLocations.Contains(value))
+                UsedLocations.Add(value);
         }
     }
 }

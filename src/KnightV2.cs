@@ -38,14 +38,16 @@ namespace KnightMoves
 
         public KnightV2 Move(Coordinates newCoordinates)
         {
-            if (!AvailableMoves.Contains(newCoordinates)) throw new InvalidMoveException();
-
+            if (!AvailableMoves.Contains(newCoordinates))
+                throw new InvalidMoveException();
+            
             if (_isStartPosition)
             {
                 PublishMovement(Location);
             }
 
             return new KnightV2(newCoordinates, _chessboard, _observers);
+        
         }
 
         private void PublishMovement(Coordinates newCoordinates)
